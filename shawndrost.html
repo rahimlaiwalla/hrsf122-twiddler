@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <script src="data_generator.js"></script>
+  </head>
+  <body>
+    <header>
+     <h1 class='title'>@shawndrost</h1>
+    </header>
+    <div class='tweets'>ChirpChirp</div>
+      <div class = 'button'>
+      <button class="add_tweets" id="check">checktweets</button>
+<!--       <h5><a href="Twiddler-ers.html">Twiddler-ers</a></h5> -->
+      <button><a href="index.html">home</a></button>
+    </div>
+      <section class = "newsfeed"></section>
+
+    
+
+  
+      <script>
+
+       $(document).ready(function(){
+         var $tweets = $('.newsfeed');
+         $tweets.html('');
+         var arrayofIndex = []
+
+
+         var index = streams.users.shawndrost.length - 1;
+         arrayofIndex.push(index)
+         while(index >= 0){
+            var tweet = streams.users.shawndrost[index];
+            var $tweet = $('<div></div>');
+            var dateOfTweet = tweet.created_at;
+            var stringDate = dateOfTweet.toString();
+            var date = stringDate.substring(0, 25);
+            $tweet.text(date + '@' + tweet.user + ': ' + tweet.message);
+            $tweet.appendTo($tweets);
+            index -= 1;
+         }
+
+          $( ".add_tweets" ).click(function() {
+         
+            generateRandomTweet();
+
+            var index = streams.users.shawndrost.length - 1;
+           var start = arrayofIndex[0] + 1
+           arrayofIndex.splice(0, 1, index)
+            while(index >= start){
+              var tweet = streams.users.shawndrost[start];
+              var $tweet = $('<div></div>');
+              var dateOfTweet = tweet.created_at;
+              var stringDate = dateOfTweet.toString();
+             var date = stringDate.substring(0, 25);
+             $tweet.text(date + '@' + tweet.user + ': ' + tweet.message);
+             $tweet.prependTo(".newsfeed");
+             start += 1;
+            }
+         })
+         });
+
+      </script>
+    
+  </body>
+</html>

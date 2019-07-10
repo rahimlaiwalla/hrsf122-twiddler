@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <script src="data_generator.js"></script>
+  </head>
+  <body>
+  
+    <h1 class='title'>Chirpper</h1>
+    <div class= "buts">
+      <button class="add_tweets" id="check">New Chirps</button>
+      <button><a href="Twiddler-ers.html">Friends</a></button>
+    </div>
+    <div class = 'feed'>
+      <h4 class='tweets'>Chirps:</h4>
+      <section class = "newsfeed"></section>
+     
+
+    
+
+  
+      <script>
+
+       $(document).ready(function(){
+         var $tweets = $('.newsfeed');
+         $tweets.html('');
+         var arrayofIndex = []
+
+
+         var index = streams.home.length - 1;
+         arrayofIndex.push(index)
+         while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            var dateOfTweet = tweet.created_at;
+            var stringDate = dateOfTweet.toString();
+            var date = stringDate.substring(0, 25);
+            var x = $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            x.appendTo($tweets);
+           
+
+
+            var $date = $('<div></div>');
+            var dateOfTweet = tweet.created_at;
+            var stringDate = dateOfTweet.toString();
+            var date = stringDate.substring(0, 25);
+            var d = $date.text(date);
+            d.appendTo($tweet);
+
+            $tweet.css("border", "2px solid #56b3d9");
+            $tweet.css("border-radius", "20px")
+            $tweet.css("height", "60px")
+            $tweet.css("width", "600px")
+            $tweet.css("padding", "10px")
+            $tweet.css("margin", "40px")
+            $tweet.css("color", "grey");
+            $date.css("color", "silver");
+
+            index -= 1;
+         }
+
+         
+        
+         
+         $( ".add_tweets" ).click(function() {
+         
+            generateRandomTweet();
+
+            var index = streams.home.length - 1;
+           var start = arrayofIndex[0] + 1
+           arrayofIndex.splice(0, 1, index)
+            while(index >= start){
+              var tweet = streams.home[start];
+              var $tweet = $('<div></div>');
+//               var dateOfTweet = tweet.created_at;
+//               var stringDate = dateOfTweet.toString();
+//              var date = stringDate.substring(0, 25);
+             var y = $tweet.text('@' + tweet.user + ': ' + tweet.message);
+             y.prependTo(".newsfeed");
+
+            var $date = $('<div></div>');
+            var dateOfTweet = tweet.created_at;
+            var stringDate = dateOfTweet.toString();
+            var date = stringDate.substring(0, 25);
+            var d = $date.text(date);
+            d.appendTo($tweet);
+
+
+            $tweet.css("border", "2px solid #56b3d9");
+            $tweet.css("border-radius", "20px")
+            $tweet.css("height", "60px")
+            $tweet.css("width", "600px")
+            $tweet.css("padding", "10px")
+            $tweet.css("margin", "40px")
+            $tweet.css("color", "grey");
+            $date.css("color", "silver");
+
+           
+           
+             start += 1;
+            }
+         })
+         $(".title").css("color", "#56b3d9")
+
+         $(".tweets").css("color", "grey");
+         $(".tweets").css("margin-left", "40px");
+         $(".tweets").css("width", "10px");
+         
+
+        });
+
+      </script>
+     </div>
+  </body>
+</html>
